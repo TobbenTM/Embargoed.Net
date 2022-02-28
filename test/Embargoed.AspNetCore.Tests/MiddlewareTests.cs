@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using Xunit;
@@ -11,7 +13,11 @@ namespace Embargoed.AspNetCore.Tests
 
         public MiddlewareTests()
         {
-            var testHost = new WebApplicationFactory<TestApp>();
+            var testHost = new WebApplicationFactory<TestApp>()
+                .WithWebHostBuilder(conf =>
+                {
+                    conf.UseContentRoot(Directory.GetCurrentDirectory());
+                });
             _client = testHost.CreateClient();
         }
 
