@@ -66,7 +66,7 @@ jobs:
 
       - name: Push package
         run: |
-          dotnet nuget push Embargoed.AspNetCore.${{ needs.calculate-version.outputs.semVer }}.nupgk \
+          dotnet nuget push Embargoed.AspNetCore.${{ needs.calculate-version.outputs.semVer }}.nupkg \
             -k ${{ secrets.NUGET_API_KEY }} \
             -s https://api.nuget.org/v3/index.json \
             --skip-duplicate
