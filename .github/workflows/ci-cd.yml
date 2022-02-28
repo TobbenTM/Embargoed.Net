@@ -57,10 +57,16 @@ jobs:
         with:
           dotnet-version: '6.0.x'
 
-      - name: Publish package
-        uses: rohith/publish-nuget@v2.5.5
-        with:
-          PROJECT_FILE_PATH: src/Embargoed.AspNetCore/Embargoed.AspNetCore.csproj
-          PACKAGE_NAME: Embargoed.AspNetCore
-          VERSION_STATIC: ${{ needs.calculate-version.outputs.semVer }}
-          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+      - name: Pack nuget
+        run: |
+          dotnet pack src/Embargoed.AspNetCore/Embargoed.AspNetCore.csproj \
+            -c Release \
+            -o . \
+            -p:Version=${{ needs.calculate-version.outputs.semVer }}
+
+      - name: Push package
+        run: |
+          dotnet nuget push Embargoed.AspNetCore.${{ needs.calculate-version.outputs.semVer }}.nupgk \
+            -k ${{ secrets.NUGET_API_KEY }} \
+            -s https://api.nuget.org/v3/index.json \
+            --skip-duplicate
