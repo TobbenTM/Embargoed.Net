@@ -27,7 +27,7 @@ jobs:
         id: gitversion
         uses: gittools/actions/gitversion/execute@v0.9.11
 
- run_tests:
+  run_tests:
     name: Run all tests for solution
     runs-on: ubuntu-latest
     steps:
