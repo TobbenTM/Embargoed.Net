@@ -11,7 +11,11 @@ Here's the message that replaces all pages of your app:
 
 ##  Installation
 
+Use Rider/Visual Studio or run the following command:
+
 `dotnet add package Embargoed.AspNetCore`
+
+More details found here: [https://www.nuget.org/packages/Embargoed.AspNetCore/](https://www.nuget.org/packages/Embargoed.AspNetCore/)
 
 In your `Program.cs` file (using .Net 6.0 minimal API):
 
